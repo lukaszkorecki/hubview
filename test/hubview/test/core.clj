@@ -2,5 +2,11 @@
   (:use [hubview.core])
   (:use [clojure.test]))
 
-(deftest replace-me ;; FIXME: write
-  (is false "No tests have been written."))
+(def an-event
+  {:authors [{:name "a-name"}]
+   :link "a link"
+   :title "a title"
+  })
+
+(deftest extracting
+         (is (= "yo" (:link (extract-event-data (an-event))))))

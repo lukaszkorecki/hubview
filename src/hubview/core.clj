@@ -1,21 +1,10 @@
 (ns hubview.core)
-(require 'lib/feedparser-clj.core))
+(require 'hubview.events)
 
 ; get url from user
-(def url (slurp (str (-> (java.io.File. "").getAbsolutePath) "~/conf.clj")))
-; parse the feed
-(def feed (feedparser-clj.core/parse-feed url))
+(def url
+  "Read feed url from config file"
+  (slurp (str (-> (java.io.File. "").getAbsolutePath) "/conf.clj")))
 
-(defn extract-event-data
-  "Extracts information from single event from events feed"
-  [event]
-  ; helpers
-  (defn title [event] (event :title ))
-  (defn author [event] ((first (event :authors )) :name))
-  (defn link [event] (event :link))
+(first (hubview.events/get-events-from url))
 
-  {:who (author event)
-  :link (link event)
-  :title (title event)})
-
-(first (map extract-event-data (feed :entries)))

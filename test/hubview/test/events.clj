@@ -5,8 +5,14 @@
 (def an-event
   {:authors [{:name "a-name"}]
    :link "a link"
-   :title "a title"
-  })
+   :title "a title" })
 
-(deftest extracting
-         (is (= "yo" (:link (extract-event-data (an-event))))))
+(def extracted
+  (hubview.events/extract-event-data an-event))
+
+(deftest extracted-url
+         (is (=  "a link" (extracted :link))))
+(deftest extracted-authors
+         (is (=  "a-name" (extracted :who))))
+(deftest extracted-title
+         (is (=  "a title" (extracted :title))))

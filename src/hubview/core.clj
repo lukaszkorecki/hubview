@@ -1,10 +1,15 @@
 (ns hubview.core)
+(require '[clojure.string :as st])
 (require '[hubview.events :as ev])
 (require '[hubview.printer :as p])
 
-; get url from user
-(def url
-  "Read feed url from config file"
-  (slurp (str (-> (java.io.File. "").getAbsolutePath) "/conf.clj")))
+(defn -main
+  []
+  ; get url from user
+  (def url
+    "Read feed url from config file"
+    (slurp (str (-> (java.io.File. "").getAbsolutePath) "/conf.clj")))
 
-(p/print-event (first (ev/get-events-from url)))
+  (def col
+    (map p/print-event (ev/get-events-from url)))
+  (println (st/join "\n\n" col)))

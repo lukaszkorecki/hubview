@@ -4,12 +4,11 @@
 (require '[hubview.printer :as p])
 
 (defn -main
-  []
-  ; get url from user
-  (def url
-    "Read feed url from config file"
-    (slurp (str (-> (java.io.File. "").getAbsolutePath) "/conf.clj")))
+  [& args]
+  (println args)
+  ; get url from user, no error checking or cmd line arg parsing yet
+  (def url (first args))
 
-  (def col
-    (map p/print-event (ev/get-events-from url)))
+  ; latest on the bottom
+  (def col (reverse (map p/print-event (ev/get-events-from url))))
   (println (st/join "\n\n" col)))

@@ -5,7 +5,9 @@
   [event]
   (apply str
       (tc/taint :green (event :who))
-      ":"
+      " : "
       (event :title)
       "\n"
-      (tc/taint :blue (event :link))))
+      (tc/taint :blue (event :link))
+      "\n"
+      (tc/taint :yellow (event :created_at))))

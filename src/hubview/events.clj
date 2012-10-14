@@ -1,5 +1,6 @@
 (ns hubview.events)
 (require 'lib/feedparser-clj.core)
+(use '[clojure.string :only [replace-first trim]])
 
 (defn get-feed-content
   [url]
@@ -9,13 +10,15 @@
   "Extracts information from single event from events feed"
   [event]
   ; helpers
-  (defn title [event] (event :title ))
-  (defn author [event] ((first (event :authors )) :name))
-  (defn link [event] (event :link))
+  (def author ((first (event :authors )) :name))
+  (def link   (event :link))
+  (def created_at (event :published))
+  (def title  (event :title ))
 
-  {:who (author event)
-  :link (link event)
-  :title (title event)})
+  {:who author
+  :link  link
+  :created_at created_at
+  :title title})
 
 (defn get-events-from
   "Get an event list for given url"

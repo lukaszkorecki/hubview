@@ -5,7 +5,7 @@
   [event]
   (apply str
       (tc/taint :green (event :who))
-      " : "
+      " "
       (event :title)
       " "
       (tc/taint :yellow (str (event :date)))

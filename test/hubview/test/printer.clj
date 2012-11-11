@@ -13,6 +13,6 @@
 
 (deftest printer-line
          (def res
-           (re-find #".*user.*:.*title.*2001-11-11.*\n.*http://somewhere.lol.*" printed))
+           (re-find #".*user.*title.*2001-11-11.*\n.*http://somewhere.lol.*" printed))
          (is (not= res nil)))
 

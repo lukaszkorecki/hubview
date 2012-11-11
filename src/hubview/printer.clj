@@ -7,7 +7,7 @@
       (tc/taint :green (event :who))
       " : "
       (event :title)
+      " "
+      (tc/taint :yellow (str (event :date)))
       "\n"
-      (tc/taint :blue (event :link))
-      "\n"
-      (tc/taint :yellow (event :created_at))))
+      (tc/taint :blue (event :link))))

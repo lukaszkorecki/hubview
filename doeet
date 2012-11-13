@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+if [[ -z $1 ]]; then
+  echo "your forgot the Github atom feed url!"
+  exit 1
+fi
+
+if [[ -z $2 ]]; then
+  interval=300
+else
+  interval=$2
+fi
+
+echo $*
+echo Will refresh every $interval seconds
+
+while true
+do
+  lein run $1
+  echo "-------- Checked at: $(date)"
+  sleep $interval
+done
